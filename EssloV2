@@ -1,0 +1,21 @@
+var utils = require('../lib/utils.js');
+var logic = require('./../lib/codingpains-logic');
+
+var esslo = {
+  info: {
+    name: 'esslo',
+    style: 'esslo' 
+  },
+  ai: (playerState, enemiesStates, gameEnvironment) => {
+    if(gameEnvironment.ammoPosition.length > 0) {
+      var ammodirection = utils.getDirection(playerState.position, gameEnvironment.ammoPosition[0])
+      if(playerState.direction == ammodirection){return 'move'}
+      if(playerState.direction !== ammodirection){return ammodirection}
+    }
+    if(playerState.ammo >= '1'){return 'shoot'}
+    return utils.safeRandomMove();
+  }
+};
+
+module.exports = esslo;
+  
